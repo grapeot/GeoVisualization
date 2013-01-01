@@ -10,7 +10,7 @@ filename = 'access.log.2'
 f = file(filename, 'r')
 f_out = file('tmp.txt', 'w')
 
-# read the file and get total line number
+# use wc to get total line number efficiently
 print('Parsing log file {0}...'.format(filename))
 wc = sp.check_output(['wc', filename])
 m = re.search('^ (\\d+) ', wc)
@@ -32,7 +32,7 @@ while f:
         continue
     ip = m.groups()[0]
 
-    # invoke online service to turn IP into geolocation
+    # invoke the online service (check reference on top) to turn IP into geolocation
     url = 'http://dituren-service.appspot.com/services/ip_lookup?c=onIpLookupLoaded&ip={0}'.format(ip)
     result = urllib2.urlopen(url).read()
 
